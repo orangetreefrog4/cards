@@ -1,0 +1,412 @@
+[gd_scene format=3 uid="uid://bfboasdmff36w"]
+
+[ext_resource type="Texture2D" uid="uid://cwp2qm2dxxaps" path="res://images/cards/cardback.png" id="1_hq0u6"]
+
+[sub_resource type="GDScript" id="GDScript_sul5r"]
+resource_name = "Welcome"
+script/source = "extends Control
+
+
+func _ready() -> void:
+	visible = true
+
+
+func _on_close_welcome_pressed() -> void:
+	visible = false
+"
+
+[sub_resource type="GDScript" id="GDScript_7h61r"]
+resource_name = "Howto"
+script/source = "extends Control
+
+
+func _ready() -> void:
+	visible = false
+
+
+func _on_howto_pressed() -> void:
+	visible = true
+
+
+func _on_close_howto_pressed() -> void:
+	visible = false
+"
+
+[sub_resource type="GDScript" id="GDScript_0sr1o"]
+resource_name = "PauseMenu"
+script/source = "extends Control
+
+
+func _ready() -> void:
+	visible = false
+	set_process_input(true)
+
+func _process(delta: float) -> void:
+	if Input.is_key_pressed(KEY_ESCAPE):
+		visible = true
+
+func _on_main_menu_pressed() -> void:
+	# Handled by \"Loading\"
+	pass
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit(0)
+
+
+func _on_resume_game_pressed() -> void:
+	visible = false
+"
+
+[sub_resource type="GDScript" id="GDScript_kelw5"]
+resource_name = "Loading"
+script/source = "extends Control
+
+
+func _ready() -> void:
+	visible = false
+
+
+func _on_main_menu_pressed() -> void:
+	visible = true
+	get_tree().change_scene_to_file(\"res://scenes/startmenu/start_menu.tscn\")
+	visible = false
+"
+
+[node name="Game" type="Node2D" unique_id=820381137]
+
+[node name="Background" type="Node2D" parent="." unique_id=1453997197]
+
+[node name="Table" type="Node2D" parent="Background" unique_id=981677929]
+
+[node name="Fluffy Green Bit" type="ColorRect" parent="Background/Table" unique_id=1952606796]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.03137255, 0.2901961, 0, 1)
+
+[node name="EdgeTop" type="ColorRect" parent="Background/Table" unique_id=26768064]
+offset_right = 1152.0
+offset_bottom = 32.0
+color = Color(0.25264242, 0.0651009, 0, 1)
+
+[node name="EdgeBottom" type="ColorRect" parent="Background/Table" unique_id=751272286]
+offset_top = 616.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.25264242, 0.0651009, 0, 1)
+
+[node name="EdgeLeft" type="ColorRect" parent="Background/Table" unique_id=1309154631]
+offset_right = 32.0
+offset_bottom = 648.0
+color = Color(0.25264242, 0.0651009, 0, 1)
+
+[node name="EdgeRight" type="ColorRect" parent="Background/Table" unique_id=663381845]
+offset_left = 1120.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.25264242, 0.0651009, 0, 1)
+
+[node name="Cards" type="Node2D" parent="." unique_id=104892866]
+
+[node name="Players" type="Node2D" parent="Cards" unique_id=439877731]
+
+[node name="Card1" type="Sprite2D" parent="Cards/Players" unique_id=291469443]
+texture_filter = 1
+position = Vector2(128, 480)
+scale = Vector2(2, 2)
+texture = ExtResource("1_hq0u6")
+
+[node name="Card2" type="Sprite2D" parent="Cards/Players" unique_id=1839149155]
+texture_filter = 1
+position = Vector2(288, 480)
+scale = Vector2(2, 2)
+texture = ExtResource("1_hq0u6")
+
+[node name="Extras" type="Node2D" parent="Cards/Players" unique_id=361534589]
+visible = false
+
+[node name="Card3" type="Sprite2D" parent="Cards/Players/Extras" unique_id=1049466120]
+texture_filter = 1
+position = Vector2(448, 480)
+scale = Vector2(2, 2)
+texture = ExtResource("1_hq0u6")
+
+[node name="Card4" type="Sprite2D" parent="Cards/Players/Extras" unique_id=2007379719]
+texture_filter = 1
+position = Vector2(608, 480)
+scale = Vector2(2, 2)
+texture = ExtResource("1_hq0u6")
+
+[node name="Card5" type="Sprite2D" parent="Cards/Players/Extras" unique_id=81562556]
+texture_filter = 1
+position = Vector2(768, 480)
+scale = Vector2(2, 2)
+texture = ExtResource("1_hq0u6")
+
+[node name="Opponents" type="Node2D" parent="Cards" unique_id=1948365765]
+
+[node name="Card1" type="Sprite2D" parent="Cards/Opponents" unique_id=640458582]
+texture_filter = 1
+position = Vector2(384, 160)
+rotation = 3.1415927
+scale = Vector2(2, 2)
+texture = ExtResource("1_hq0u6")
+
+[node name="Card2" type="Sprite2D" parent="Cards/Opponents" unique_id=959662488]
+texture_filter = 1
+position = Vector2(544, 160)
+rotation = 3.1415927
+scale = Vector2(2, 2)
+texture = ExtResource("1_hq0u6")
+
+[node name="Extras" type="Node2D" parent="Cards/Opponents" unique_id=2017772253]
+visible = false
+
+[node name="Card3" type="Sprite2D" parent="Cards/Opponents/Extras" unique_id=1940681375]
+texture_filter = 1
+position = Vector2(704, 160)
+rotation = -3.1415925
+scale = Vector2(2, 2)
+texture = ExtResource("1_hq0u6")
+
+[node name="Card4" type="Sprite2D" parent="Cards/Opponents/Extras" unique_id=1494044426]
+texture_filter = 1
+position = Vector2(864, 160)
+rotation = -3.1415925
+scale = Vector2(2, 2)
+texture = ExtResource("1_hq0u6")
+
+[node name="Card5" type="Sprite2D" parent="Cards/Opponents/Extras" unique_id=1406762382]
+texture_filter = 1
+position = Vector2(1024, 160)
+rotation = -3.1415925
+scale = Vector2(2, 2)
+texture = ExtResource("1_hq0u6")
+
+[node name="UI" type="Control" parent="." unique_id=108205536]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 864.0
+offset_top = 384.0
+offset_right = 1088.0
+offset_bottom = 576.0
+
+[node name="ColorRect" type="ColorRect" parent="UI" unique_id=190785343]
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 192.0
+color = Color(1, 1, 1, 0.19607843)
+
+[node name="Betting" type="Control" parent="UI" unique_id=413513042]
+visible = false
+anchors_preset = 0
+offset_right = 224.0
+offset_bottom = 192.0
+
+[node name="Post Dealt" type="Control" parent="UI" unique_id=1777467788]
+anchors_preset = 0
+offset_right = 224.0
+offset_bottom = 192.0
+
+[node name="Hit" type="Button" parent="UI/Post Dealt" unique_id=1947700966]
+layout_mode = 0
+offset_top = 128.0
+offset_right = 96.0
+offset_bottom = 192.0
+text = "HIT"
+
+[node name="Howto" type="Button" parent="UI/Post Dealt" unique_id=2099068739]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 128.0
+offset_right = 128.0
+offset_bottom = 192.0
+text = "?"
+
+[node name="Stand" type="Button" parent="UI/Post Dealt" unique_id=1385959467]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 224.0
+offset_bottom = 192.0
+text = "STAND"
+
+[node name="Welcome" type="Control" parent="." unique_id=1185526901]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = SubResource("GDScript_sul5r")
+
+[node name="ColorRect" type="ColorRect" parent="Welcome" unique_id=1725604455]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.6862745)
+
+[node name="Welcome Message" type="Label" parent="Welcome" unique_id=611264910]
+layout_mode = 0
+offset_top = 192.0
+offset_right = 1152.0
+offset_bottom = 448.0
+text = "Hello and welcome. This is pretty much just blackjack, but you can only hit until you have 5 cards. If you get aquire 5 cards, you win automatically, because that's how I learned to play, but apparently that's not official, but this is my game so I make the rules. >:3
+
+Thank you very much for playing my game! :3
+
+<3"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Close" type="Control" parent="Welcome" unique_id=1856370818]
+anchors_preset = 0
+offset_left = 448.0
+offset_top = 512.0
+offset_right = 488.0
+offset_bottom = 552.0
+
+[node name="CloseWelcome" type="Button" parent="Welcome/Close" unique_id=1979665562]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+text = "Close"
+
+[node name="Howto" type="Control" parent="." unique_id=329836991]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = SubResource("GDScript_7h61r")
+
+[node name="ColorRect" type="ColorRect" parent="Howto" unique_id=674925149]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.6862745)
+
+[node name="Howto" type="Label" parent="Howto" unique_id=266041147]
+layout_mode = 0
+offset_top = 192.0
+offset_right = 1152.0
+offset_bottom = 448.0
+text = "Tutorial coming soon!
+For now use google I guess.
+Sorry.
+ :/"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Close" type="Control" parent="Howto" unique_id=469300008]
+anchors_preset = 0
+offset_left = 448.0
+offset_top = 512.0
+offset_right = 488.0
+offset_bottom = 552.0
+
+[node name="CloseHowto" type="Button" parent="Howto/Close" unique_id=481312467]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+text = "Close"
+
+[node name="Menu" type="Control" parent="." unique_id=1220794769]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = SubResource("GDScript_0sr1o")
+
+[node name="ColorRect" type="ColorRect" parent="Menu" unique_id=175808582]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.6862745)
+
+[node name="Menu" type="Label" parent="Menu" unique_id=215800247]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 1152.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 60
+text = "Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Hello" type="Label" parent="Menu" unique_id=1763680524]
+layout_mode = 0
+offset_left = 616.0
+offset_top = 151.99998
+offset_right = 704.0
+offset_bottom = 183.99998
+rotation = -0.27020705
+theme_override_font_sizes/font_size = 10
+text = "Hello! :3"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MainMenu" type="Button" parent="Menu" unique_id=1373760964]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 256.0
+offset_right = 704.0
+offset_bottom = 320.0
+text = "Main menu"
+
+[node name="Quit" type="Button" parent="Menu" unique_id=2024057653]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 384.0
+offset_right = 704.0
+offset_bottom = 448.0
+text = "Quit"
+
+[node name="Close" type="Control" parent="Menu" unique_id=2088908874]
+anchors_preset = 0
+offset_left = 448.0
+offset_top = 512.0
+offset_right = 488.0
+offset_bottom = 552.0
+
+[node name="ResumeGame" type="Button" parent="Menu/Close" unique_id=307177824]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+text = "Resume"
+
+[node name="Loading" type="Control" parent="." unique_id=424314195]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = SubResource("GDScript_kelw5")
+
+[node name="ColorRect" type="ColorRect" parent="Loading" unique_id=2102346467]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="Loading" type="Label" parent="Loading" unique_id=590856404]
+layout_mode = 0
+offset_top = 256.0
+offset_right = 1152.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 60
+text = "Loading..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="UI/Post Dealt/Howto" to="Howto" method="_on_howto_pressed"]
+[connection signal="pressed" from="Welcome/Close/CloseWelcome" to="Welcome" method="_on_close_welcome_pressed"]
+[connection signal="pressed" from="Howto/Close/CloseHowto" to="Howto" method="_on_close_howto_pressed"]
+[connection signal="pressed" from="Menu/MainMenu" to="Menu" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Menu/MainMenu" to="Loading" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Menu/Quit" to="Menu" method="_on_quit_pressed"]
+[connection signal="pressed" from="Menu/Close/ResumeGame" to="Menu" method="_on_resume_game_pressed"]

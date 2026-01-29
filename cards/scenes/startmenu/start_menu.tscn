@@ -1,0 +1,267 @@
+[gd_scene format=3 uid="uid://4k52hq12hn8t"]
+
+[ext_resource type="Texture2D" uid="uid://b8iqdf5sjq0cu" path="res://icon.svg" id="1_b5igb"]
+[ext_resource type="Texture2D" uid="uid://fs1ualutmok0" path="res://images/coolnoisetexturethingy.tres" id="1_gnoft"]
+
+[sub_resource type="GDScript" id="GDScript_gnoft"]
+resource_name = "Main"
+script/source = "extends Control
+ 
+
+func _on_start_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/game/game.tscn\")
+"
+
+[sub_resource type="Gradient" id="Gradient_gnoft"]
+colors = PackedColorArray(0, 0, 1, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r6w2g"]
+gradient = SubResource("Gradient_gnoft")
+
+[sub_resource type="GDScript" id="GDScript_r6w2g"]
+resource_name = "SettingsPage"
+script/source = "extends Control
+
+
+func _ready() -> void:
+	visible = false
+
+
+func _on_settings_pressed() -> void:
+	visible = true
+
+
+func _on_close_settings_pressed() -> void:
+	visible = false
+"
+
+[sub_resource type="GDScript" id="GDScript_nphkf"]
+resource_name = "MorePage"
+script/source = "extends Control
+
+
+func _ready() -> void:
+	visible = false
+
+
+func _on_more_pressed() -> void:
+	visible = true
+
+
+func _on_close_more_pressed() -> void:
+	visible = false
+"
+
+[node name="StartMenu" type="Control" unique_id=146273725]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_gnoft")
+
+[node name="BackgroundLayer" type="Control" parent="." unique_id=583744500]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Background Placeholder" type="Sprite2D" parent="BackgroundLayer" unique_id=287440835]
+position = Vector2(288, 160)
+scale = Vector2(1.125, 0.625)
+texture = ExtResource("1_gnoft")
+
+[node name="Background Placeholder2" type="Sprite2D" parent="BackgroundLayer" unique_id=716212057]
+position = Vector2(288, 483.99997)
+scale = Vector2(1.125, 0.640625)
+texture = ExtResource("1_gnoft")
+
+[node name="Background Placeholder3" type="Sprite2D" parent="BackgroundLayer" unique_id=1674111848]
+position = Vector2(864, 160)
+scale = Vector2(1.1249999, 0.625)
+texture = ExtResource("1_gnoft")
+
+[node name="Background Placeholder4" type="Sprite2D" parent="BackgroundLayer" unique_id=1801187932]
+position = Vector2(864, 484)
+scale = Vector2(1.1249999, 0.64062506)
+texture = ExtResource("1_gnoft")
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundLayer" unique_id=1199049267]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.09803922)
+
+[node name="Label" type="Label" parent="BackgroundLayer" unique_id=1943663812]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 60.0
+offset_right = 1282.0
+offset_bottom = 173.0
+rotation = 0.5186391
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "!!! COOL BACKGROUND COMING SOON !!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="MenuOptions" type="Control" parent="." unique_id=1319492088]
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 256.0
+offset_right = 256.0
+offset_bottom = 576.0
+
+[node name="Start" type="Control" parent="MenuOptions" unique_id=1252528238]
+layout_mode = 1
+anchor_left = -4.0
+anchor_top = -3.2
+anchor_right = -4.0
+anchor_bottom = -3.2
+offset_left = 768.0
+offset_top = 1024.0
+offset_right = 960.0
+offset_bottom = 1088.0
+
+[node name="Sprite2D" type="Sprite2D" parent="MenuOptions/Start" unique_id=2046741931]
+position = Vector2(96, 32)
+scale = Vector2(0.75, 64.5)
+texture = SubResource("GradientTexture1D_r6w2g")
+
+[node name="Button" type="Button" parent="MenuOptions/Start" unique_id=607076017]
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 64.0
+text = "Start"
+
+[node name="Settings" type="Control" parent="MenuOptions" unique_id=1578413762]
+layout_mode = 1
+anchor_left = -4.0
+anchor_top = -3.2
+anchor_right = -4.0
+anchor_bottom = -3.2
+offset_left = 768.0
+offset_top = 1152.0
+offset_right = 960.0
+offset_bottom = 1216.0
+
+[node name="Sprite2D" type="Sprite2D" parent="MenuOptions/Settings" unique_id=1073505174]
+position = Vector2(96, 32.25)
+scale = Vector2(0.75, 64.5)
+texture = SubResource("GradientTexture1D_r6w2g")
+
+[node name="Button" type="Button" parent="MenuOptions/Settings" unique_id=500976395]
+layout_mode = 0
+offset_top = 0.25
+offset_right = 192.0
+offset_bottom = 64.25
+text = "Settings"
+
+[node name="More" type="Control" parent="MenuOptions" unique_id=2017387576]
+layout_mode = 1
+anchor_left = -4.0
+anchor_top = -3.2
+anchor_right = -4.0
+anchor_bottom = -3.2
+offset_left = 768.0
+offset_top = 1280.0
+offset_right = 960.0
+offset_bottom = 1344.0
+
+[node name="Sprite2D" type="Sprite2D" parent="MenuOptions/More" unique_id=88750233]
+position = Vector2(96, 32.25)
+scale = Vector2(0.75, 64.5)
+texture = SubResource("GradientTexture1D_r6w2g")
+
+[node name="Button" type="Button" parent="MenuOptions/More" unique_id=188105436]
+layout_mode = 0
+offset_top = 0.25
+offset_right = 192.0
+offset_bottom = 64.25
+text = "More"
+
+[node name="Logo" type="Sprite2D" parent="." unique_id=998466048]
+position = Vector2(160, 128)
+texture = ExtResource("1_b5igb")
+
+[node name="SettingsPage" type="Control" parent="." unique_id=1140109794]
+visible = false
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = SubResource("GDScript_r6w2g")
+
+[node name="ColorRect" type="ColorRect" parent="SettingsPage" unique_id=1317783292]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.6862745)
+
+[node name="WIP Message" type="Label" parent="SettingsPage" unique_id=257476460]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 136.0
+text = "There's no settings yet. But thank you so much for trying my game! :3
+
+Go to \"More\" for a fun fact!
+
+<3"
+autowrap_mode = 2
+
+[node name="Close" type="Control" parent="SettingsPage" unique_id=1995500778]
+anchors_preset = 0
+offset_left = 448.0
+offset_top = 512.0
+offset_right = 488.0
+offset_bottom = 552.0
+
+[node name="CloseSettingsButton" type="Button" parent="SettingsPage/Close" unique_id=694851777]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+text = "Close"
+
+[node name="MorePage" type="Control" parent="." unique_id=818245347]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_nphkf")
+
+[node name="Shade" type="ColorRect" parent="MorePage" unique_id=663677477]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.6862745)
+
+[node name="WIP Message" type="Label" parent="MorePage" unique_id=1789515071]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 136.0
+text = "There's nothing here yet. But thank you so much for trying my game! :3
+
+Here's a card game fact for you while you're here, though:
+In UNO, you can only use the \"wild draw 4\" cards if you can't play anything else. Any other player can \"challenge\" you if you play it. In this case, you show them your deck. If you played it illegally, you draw 4 cards. If you played it legally, though, the challenger has to draw 6 cards. It's in the official rulebook!
+
+<3"
+autowrap_mode = 2
+
+[node name="Close" type="Control" parent="MorePage" unique_id=762021468]
+anchors_preset = 0
+offset_left = 448.0
+offset_top = 512.0
+offset_right = 488.0
+offset_bottom = 552.0
+
+[node name="CloseMoreButton" type="Button" parent="MorePage/Close" unique_id=551285142]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+text = "Close"
+
+[connection signal="pressed" from="MenuOptions/Start/Button" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MenuOptions/Settings/Button" to="SettingsPage" method="_on_settings_pressed"]
+[connection signal="pressed" from="MenuOptions/More/Button" to="MorePage" method="_on_more_pressed"]
+[connection signal="pressed" from="SettingsPage/Close/CloseSettingsButton" to="SettingsPage" method="_on_close_settings_pressed"]
+[connection signal="pressed" from="MorePage/Close/CloseMoreButton" to="MorePage" method="_on_close_more_pressed"]
