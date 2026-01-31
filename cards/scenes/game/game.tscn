@@ -1,6 +1,57 @@
 [gd_scene format=3 uid="uid://bfboasdmff36w"]
 
+[ext_resource type="Script" uid="uid://b0lp55uhndcsd" path="res://scenes/game/game.gd" id="1_7h61r"]
 [ext_resource type="Texture2D" uid="uid://cwp2qm2dxxaps" path="res://images/cards/cardback.png" id="1_hq0u6"]
+
+[sub_resource type="GDScript" id="GDScript_lfrn8"]
+resource_name = "player_cards"
+script/source = "extends Node2D
+
+func _on_game_set_card_1(value) -> void:
+	get_node(\"Card1/Value\").set(\"text\", value)
+	get_node(\"Card1\").set(\"visible\", true)
+
+func _on_game_set_card_2(value) -> void:
+	get_node(\"Card2/Value\").set(\"text\", value)
+	get_node(\"Card2\").set(\"visible\", true)
+
+func _on_game_set_card_3(value) -> void:
+	get_node(\"Card3/Value\").set(\"text\", value)
+	get_node(\"Card3\").set(\"visible\", true)
+
+func _on_game_set_card_4(value) -> void:
+	get_node(\"Card4/Value\").set(\"text\", value)
+	get_node(\"Card4\").set(\"visible\", true)
+
+func _on_game_set_card_5(value) -> void:
+	get_node(\"Card5/Value\").set(\"text\", value)
+	get_node(\"Card5\").set(\"visible\", true)
+"
+
+[sub_resource type="GDScript" id="GDScript_5i0tg"]
+resource_name = "opponent_cards"
+script/source = "extends Node2D
+
+func _on_game_opponent_card_1(value) -> void:
+	get_node(\"Card1/Value\").set(\"text\", value)
+	get_node(\"Card1\").set(\"visible\", true)
+
+func _on_game_opponent_card_2(value) -> void:
+	get_node(\"Card2/Value\").set(\"text\", value)
+	get_node(\"Card2\").set(\"visible\", true)
+
+func _on_game_opponent_card_3(value) -> void:
+	get_node(\"Card3/Value\").set(\"text\", value)
+	get_node(\"Card3\").set(\"visible\", true)
+
+func _on_game_opponent_card_4(value) -> void:
+	get_node(\"Card4/Value\").set(\"text\", value)
+	get_node(\"Card4\").set(\"visible\", true)
+
+func _on_game_opponent_card_5(value) -> void:
+	get_node(\"Card5/Value\").set(\"text\", value)
+	get_node(\"Card5\").set(\"visible\", true)
+"
 
 [sub_resource type="GDScript" id="GDScript_sul5r"]
 resource_name = "Welcome"
@@ -8,7 +59,7 @@ script/source = "extends Control
 
 
 func _ready() -> void:
-	visible = true
+	visible = false
 
 
 func _on_close_welcome_pressed() -> void:
@@ -74,6 +125,11 @@ func _on_main_menu_pressed() -> void:
 "
 
 [node name="Game" type="Node2D" unique_id=820381137]
+script = ExtResource("1_7h61r")
+
+[node name="Timer" type="Timer" parent="." unique_id=1651681167]
+wait_time = 0.5
+autostart = true
 
 [node name="Background" type="Node2D" parent="." unique_id=1453997197]
 
@@ -108,80 +164,154 @@ color = Color(0.25264242, 0.0651009, 0, 1)
 
 [node name="Cards" type="Node2D" parent="." unique_id=104892866]
 
-[node name="Players" type="Node2D" parent="Cards" unique_id=439877731]
+[node name="PlayerCards" type="Node2D" parent="Cards" unique_id=439877731]
+script = SubResource("GDScript_lfrn8")
 
-[node name="Card1" type="Sprite2D" parent="Cards/Players" unique_id=291469443]
+[node name="Card1" type="Sprite2D" parent="Cards/PlayerCards" unique_id=291469443]
+visible = false
 texture_filter = 1
 position = Vector2(128, 480)
 scale = Vector2(2, 2)
 texture = ExtResource("1_hq0u6")
 
-[node name="Card2" type="Sprite2D" parent="Cards/Players" unique_id=1839149155]
+[node name="Value" type="Label" parent="Cards/PlayerCards/Card1" unique_id=1265102188]
+offset_left = -20.0
+offset_top = -72.0
+offset_right = 20.0
+offset_bottom = -49.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card2" type="Sprite2D" parent="Cards/PlayerCards" unique_id=1839149155]
+visible = false
 texture_filter = 1
 position = Vector2(288, 480)
 scale = Vector2(2, 2)
 texture = ExtResource("1_hq0u6")
 
-[node name="Extras" type="Node2D" parent="Cards/Players" unique_id=361534589]
-visible = false
+[node name="Value" type="Label" parent="Cards/PlayerCards/Card2" unique_id=1048331681]
+offset_left = -20.0
+offset_top = -72.0
+offset_right = 20.0
+offset_bottom = -49.0
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Card3" type="Sprite2D" parent="Cards/Players/Extras" unique_id=1049466120]
+[node name="Card3" type="Sprite2D" parent="Cards/PlayerCards" unique_id=1049466120]
+visible = false
 texture_filter = 1
 position = Vector2(448, 480)
 scale = Vector2(2, 2)
 texture = ExtResource("1_hq0u6")
 
-[node name="Card4" type="Sprite2D" parent="Cards/Players/Extras" unique_id=2007379719]
+[node name="Value" type="Label" parent="Cards/PlayerCards/Card3" unique_id=1441742163]
+offset_left = -20.0
+offset_top = -72.0
+offset_right = 20.0
+offset_bottom = -49.0
+
+[node name="Card4" type="Sprite2D" parent="Cards/PlayerCards" unique_id=2007379719]
+visible = false
 texture_filter = 1
 position = Vector2(608, 480)
 scale = Vector2(2, 2)
 texture = ExtResource("1_hq0u6")
 
-[node name="Card5" type="Sprite2D" parent="Cards/Players/Extras" unique_id=81562556]
+[node name="Value" type="Label" parent="Cards/PlayerCards/Card4" unique_id=1934316269]
+offset_left = -20.0
+offset_top = -72.0
+offset_right = 20.0
+offset_bottom = -49.0
+
+[node name="Card5" type="Sprite2D" parent="Cards/PlayerCards" unique_id=81562556]
+visible = false
 texture_filter = 1
 position = Vector2(768, 480)
 scale = Vector2(2, 2)
 texture = ExtResource("1_hq0u6")
 
-[node name="Opponents" type="Node2D" parent="Cards" unique_id=1948365765]
+[node name="Value" type="Label" parent="Cards/PlayerCards/Card5" unique_id=1518023144]
+offset_left = -20.0
+offset_top = -72.0
+offset_right = 20.0
+offset_bottom = -49.0
 
-[node name="Card1" type="Sprite2D" parent="Cards/Opponents" unique_id=640458582]
+[node name="OpponentCards" type="Node2D" parent="Cards" unique_id=1948365765]
+script = SubResource("GDScript_5i0tg")
+
+[node name="Card1" type="Sprite2D" parent="Cards/OpponentCards" unique_id=640458582]
+visible = false
 texture_filter = 1
 position = Vector2(384, 160)
 rotation = 3.1415927
 scale = Vector2(2, 2)
 texture = ExtResource("1_hq0u6")
 
-[node name="Card2" type="Sprite2D" parent="Cards/Opponents" unique_id=959662488]
+[node name="Value" type="Label" parent="Cards/OpponentCards/Card1" unique_id=412323798]
+offset_left = -20.000008
+offset_top = -72.0
+offset_right = 20.0
+offset_bottom = -49.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card2" type="Sprite2D" parent="Cards/OpponentCards" unique_id=959662488]
+visible = false
 texture_filter = 1
 position = Vector2(544, 160)
 rotation = 3.1415927
 scale = Vector2(2, 2)
 texture = ExtResource("1_hq0u6")
 
-[node name="Extras" type="Node2D" parent="Cards/Opponents" unique_id=2017772253]
-visible = false
+[node name="Value" type="Label" parent="Cards/OpponentCards/Card2" unique_id=1579872254]
+offset_left = -20.000008
+offset_top = -72.0
+offset_right = 20.0
+offset_bottom = -49.0
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Card3" type="Sprite2D" parent="Cards/Opponents/Extras" unique_id=1940681375]
+[node name="Card3" type="Sprite2D" parent="Cards/OpponentCards" unique_id=1940681375]
+visible = false
 texture_filter = 1
 position = Vector2(704, 160)
 rotation = -3.1415925
 scale = Vector2(2, 2)
 texture = ExtResource("1_hq0u6")
 
-[node name="Card4" type="Sprite2D" parent="Cards/Opponents/Extras" unique_id=1494044426]
+[node name="Value" type="Label" parent="Cards/OpponentCards/Card3" unique_id=783533094]
+offset_left = -20.000011
+offset_top = -72.0
+offset_right = 19.999989
+offset_bottom = -49.0
+
+[node name="Card4" type="Sprite2D" parent="Cards/OpponentCards" unique_id=1494044426]
+visible = false
 texture_filter = 1
 position = Vector2(864, 160)
 rotation = -3.1415925
 scale = Vector2(2, 2)
 texture = ExtResource("1_hq0u6")
 
-[node name="Card5" type="Sprite2D" parent="Cards/Opponents/Extras" unique_id=1406762382]
+[node name="Value" type="Label" parent="Cards/OpponentCards/Card4" unique_id=2054984568]
+offset_left = -20.000011
+offset_top = -72.0
+offset_right = 19.999989
+offset_bottom = -49.0
+
+[node name="Card5" type="Sprite2D" parent="Cards/OpponentCards" unique_id=1406762382]
+visible = false
 texture_filter = 1
 position = Vector2(1024, 160)
 rotation = -3.1415925
 scale = Vector2(2, 2)
 texture = ExtResource("1_hq0u6")
+
+[node name="Value" type="Label" parent="Cards/OpponentCards/Card5" unique_id=721635767]
+offset_left = -20.000011
+offset_top = -72.0
+offset_right = 19.999989
+offset_bottom = -49.0
 
 [node name="UI" type="Control" parent="." unique_id=108205536]
 layout_mode = 3
@@ -191,10 +321,18 @@ offset_top = 384.0
 offset_right = 1088.0
 offset_bottom = 576.0
 
-[node name="ColorRect" type="ColorRect" parent="UI" unique_id=190785343]
+[node name="Backshade" type="ColorRect" parent="UI" unique_id=190785343]
 layout_mode = 0
 offset_right = 224.0
 offset_bottom = 192.0
+color = Color(1, 1, 1, 0.19607843)
+
+[node name="OpponentUI" type="ColorRect" parent="UI" unique_id=618910154]
+layout_mode = 0
+offset_left = -800.0
+offset_top = -320.0
+offset_right = -576.0
+offset_bottom = -128.0
 color = Color(1, 1, 1, 0.19607843)
 
 [node name="Betting" type="Control" parent="UI" unique_id=413513042]
@@ -203,19 +341,97 @@ anchors_preset = 0
 offset_right = 224.0
 offset_bottom = 192.0
 
-[node name="Post Dealt" type="Control" parent="UI" unique_id=1777467788]
+[node name="Text" type="Control" parent="UI" unique_id=728153777]
+anchors_preset = 0
+offset_right = 224.0
+offset_bottom = 128.0
+
+[node name="Labels" type="Control" parent="UI/Text" unique_id=969380482]
+anchors_preset = 0
+offset_right = 224.0
+offset_bottom = 64.0
+
+[node name="YouLabel" type="Label" parent="UI/Text/Labels" unique_id=895812853]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "Your
+score"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="RoundLabel" type="Label" parent="UI/Text/Labels" unique_id=1532382702]
+layout_mode = 0
+offset_left = 80.0
+offset_right = 144.0
+offset_bottom = 64.0
+text = "Round
+no"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="VSLabel" type="Label" parent="UI/Text/Labels" unique_id=609608455]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 224.0
+offset_bottom = 64.0
+text = "VS
+score"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="YouScore" type="Label" parent="UI/Text" unique_id=1812163744]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 128.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoundNo" type="Label" parent="UI/Text" unique_id=1276622788]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 64.0
+offset_right = 144.0
+offset_bottom = 128.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSScore" type="Label" parent="UI/Text" unique_id=1406115090]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 64.0
+offset_right = 224.0
+offset_bottom = 128.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PreDealt" type="Control" parent="UI" unique_id=400897834]
+anchors_preset = 0
+offset_top = 128.0
+offset_right = 224.0
+offset_bottom = 192.0
+
+[node name="Deal" type="Button" parent="UI/PreDealt" unique_id=1656854787]
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 64.0
+text = "Deal cards"
+
+[node name="PostDealt" type="Control" parent="UI" unique_id=1777467788]
+visible = false
 anchors_preset = 0
 offset_right = 224.0
 offset_bottom = 192.0
 
-[node name="Hit" type="Button" parent="UI/Post Dealt" unique_id=1947700966]
+[node name="Hit" type="Button" parent="UI/PostDealt" unique_id=1947700966]
 layout_mode = 0
 offset_top = 128.0
 offset_right = 96.0
 offset_bottom = 192.0
 text = "HIT"
 
-[node name="Howto" type="Button" parent="UI/Post Dealt" unique_id=2099068739]
+[node name="Howto" type="Button" parent="UI/PostDealt" unique_id=2099068739]
 layout_mode = 0
 offset_left = 96.0
 offset_top = 128.0
@@ -223,7 +439,7 @@ offset_right = 128.0
 offset_bottom = 192.0
 text = "?"
 
-[node name="Stand" type="Button" parent="UI/Post Dealt" unique_id=1385959467]
+[node name="Stand" type="Button" parent="UI/PostDealt" unique_id=1385959467]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 128.0
@@ -380,6 +596,7 @@ offset_bottom = 64.0
 text = "Resume"
 
 [node name="Loading" type="Control" parent="." unique_id=424314195]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
@@ -403,7 +620,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[connection signal="pressed" from="UI/Post Dealt/Howto" to="Howto" method="_on_howto_pressed"]
+[connection signal="opponent_card1" from="." to="Cards/OpponentCards" method="_on_game_opponent_card_1"]
+[connection signal="opponent_card2" from="." to="Cards/OpponentCards" method="_on_game_opponent_card_2"]
+[connection signal="opponent_card3" from="." to="Cards/OpponentCards" method="_on_game_opponent_card_3"]
+[connection signal="opponent_card4" from="." to="Cards/OpponentCards" method="_on_game_opponent_card_4"]
+[connection signal="opponent_card5" from="." to="Cards/OpponentCards" method="_on_game_opponent_card_5"]
+[connection signal="set_card1" from="." to="Cards/PlayerCards" method="_on_game_set_card_1"]
+[connection signal="set_card2" from="." to="Cards/PlayerCards" method="_on_game_set_card_2"]
+[connection signal="set_card3" from="." to="Cards/PlayerCards" method="_on_game_set_card_3"]
+[connection signal="set_card4" from="." to="Cards/PlayerCards" method="_on_game_set_card_4"]
+[connection signal="set_card5" from="." to="Cards/PlayerCards" method="_on_game_set_card_5"]
+[connection signal="pressed" from="UI/PreDealt/Deal" to="." method="_on_deal_pressed"]
+[connection signal="pressed" from="UI/PostDealt/Hit" to="." method="_on_hit_pressed"]
+[connection signal="pressed" from="UI/PostDealt/Howto" to="Howto" method="_on_howto_pressed"]
+[connection signal="pressed" from="UI/PostDealt/Stand" to="." method="_on_stand_pressed"]
 [connection signal="pressed" from="Welcome/Close/CloseWelcome" to="Welcome" method="_on_close_welcome_pressed"]
 [connection signal="pressed" from="Howto/Close/CloseHowto" to="Howto" method="_on_close_howto_pressed"]
 [connection signal="pressed" from="Menu/MainMenu" to="Menu" method="_on_main_menu_pressed"]
