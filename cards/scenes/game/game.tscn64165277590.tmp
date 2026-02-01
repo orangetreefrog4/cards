@@ -518,15 +518,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="WinReason" type="Label" parent="Winner" unique_id=1645069171]
-layout_mode = 0
-offset_left = 448.0
-offset_top = 224.0
-offset_right = 704.0
-offset_bottom = 288.0
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="PlayAgain" type="Button" parent="Winner" unique_id=1851479636]
 layout_mode = 0
 offset_left = 448.0

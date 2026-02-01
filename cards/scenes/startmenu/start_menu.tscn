@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://4k52hq12hn8t"]
 
-[ext_resource type="Texture2D" uid="uid://b8iqdf5sjq0cu" path="res://icon.svg" id="1_b5igb"]
 [ext_resource type="Texture2D" uid="uid://fs1ualutmok0" path="res://images/coolnoisetexturethingy.tres" id="1_gnoft"]
 
 [sub_resource type="GDScript" id="GDScript_gnoft"]
@@ -180,9 +179,25 @@ offset_right = 192.0
 offset_bottom = 64.25
 text = "More"
 
-[node name="Logo" type="Sprite2D" parent="." unique_id=998466048]
-position = Vector2(160, 128)
-texture = ExtResource("1_b5igb")
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1361553839]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 64.0
+offset_right = 224.0
+offset_bottom = 192.0
+
+[node name="Logo Replacement" type="Label" parent="." unique_id=1756821496]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 64.0
+offset_right = 224.0
+offset_bottom = 192.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "cards"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [node name="SettingsPage" type="Control" parent="." unique_id=1140109794]
 visible = false
