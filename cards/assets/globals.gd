@@ -7,6 +7,6 @@ var opponent_dealt_amount = 0
 var player_score = 0
 var opponent_score = 0
 var win_reason = ""
-var round = 0
+var round = 1
 
 var dev_mode = false

@@ -14,7 +14,8 @@ func update_game() -> void:
 			get_node(\"Card\"+str(x+1)).set(\"visible\", true)
 			get_node(\"Card\"+str(x+1)+\"/Value\").set(\"text\", globals.player_cards[x])
 		else :
-			break
+			get_node(\"Card\"+str(x+1)).set(\"visible\", false)
+			get_node(\"Card\"+str(x+1)+\"/Value\").set(\"text\", \"\")
 	print(\"updated!\")
 "
 
@@ -27,10 +28,21 @@ func update_game() -> void:
 	for x in range(len(globals.opponent_cards)) :
 		if x < globals.opponent_dealt_amount :
 			get_node(\"Card\"+str(x+1)).set(\"visible\", true)
+		else :
+			get_node(\"Card\"+str(x+1)).set(\"visible\", false)
+			get_node(\"Card\"+str(x+1)+\"/Value\").set(\"text\", \"\")
+	print(\"updated!\")
+
+func _on_reveal_cards() -> void:
+	print(\"reaveal called\")
+	for x in range(len(globals.opponent_cards)) :
+		if x < globals.opponent_dealt_amount :
+			get_node(\"Card\"+str(x+1)).set(\"visible\", true)
 			get_node(\"Card\"+str(x+1)+\"/Value\").set(\"text\", globals.opponent_cards[x])
 		else :
-			break
-	print(\"updated!\")
+			get_node(\"Card\"+str(x+1)).set(\"visible\", false)
+			get_node(\"Card\"+str(x+1)+\"/Value\").set(\"text\", \"\")
+	print(\"revealed!\")
 "
 
 [sub_resource type="GDScript" id="GDScript_sul5r"]
@@ -52,7 +64,7 @@ script/source = "extends Control
 
 
 func _ready() -> void:
-	visible = false
+	visible = true
 
 
 func _on_howto_pressed() -> void:
@@ -600,13 +612,27 @@ color = Color(0, 0, 0, 0.6862745)
 
 [node name="Howto" type="Label" parent="Howto" unique_id=266041147]
 layout_mode = 0
-offset_top = 192.0
+offset_top = 32.0
 offset_right = 1152.0
-offset_bottom = 448.0
-text = "Tutorial coming soon!
-For now use google I guess.
-Sorry.
- :/"
+offset_bottom = 512.0
+text = "So this is a kinda version of blackjack.
+You have cards with numbers 1-10. houses are irrelevant so they are not included.
+Your aim is to get the closest to 21 as you can, without going over, but if you get 5 cards, you automatically win.
+You do not know how many cards your opponent has until the end.
+You have to get closer to 21 than your opponent, or get 5 cards.
+When you first press \"Deal cards\", you and your opponent will both get 2 cards. Read your cards. (The white number above your card is it's value.)
+If you want another card, press \"hit\". You will get another card.
+Once you are happy with the cards you have, press \"stand\" to confirm your cards (you do not have to hit before you stand).
+If you go over 21, you go \"bust\" and lose automatically. Your opponent will win by default.
+If you get 5 cards, you win automatically.
+
+Your opponent is not a large neural network or large language model. The values I put in just work actually pretty well.
+
+There is a developer menu (ctrl+alt+d) if you want to see/mess with what's going on inside/what values certain variables are holding.
+
+(Reopen this page by pressing the \"?\" button in between the \"hit\" and \"stand\" buttons.)
+
+That's about it, have fun and thank you for playing my game!"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -620,8 +646,9 @@ offset_bottom = 552.0
 
 [node name="CloseHowto" type="Button" parent="Howto/Close" unique_id=481312467]
 layout_mode = 0
+offset_top = 40.0
 offset_right = 256.0
-offset_bottom = 64.0
+offset_bottom = 104.0
 text = "Close"
 
 [node name="Menu" type="Control" parent="." unique_id=1220794769]
@@ -762,7 +789,12 @@ text = "CARD VALUES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="DevMenu/Menus/CardValues" unique_id=661047955]
+[node name="PlayerValues" type="Control" parent="DevMenu/Menus/CardValues" unique_id=1300212190]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="DevMenu/Menus/CardValues/PlayerValues" unique_id=661047955]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 256.0
@@ -771,7 +803,7 @@ text = "player_cards (card values 1-5)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Card1" type="SpinBox" parent="DevMenu/Menus/CardValues" unique_id=374931986]
+[node name="Card1" type="SpinBox" parent="DevMenu/Menus/CardValues/PlayerValues" unique_id=374931986]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 96.0
@@ -780,7 +812,7 @@ offset_bottom = 127.0
 max_value = 10.0
 rounded = true
 
-[node name="Card2" type="SpinBox" parent="DevMenu/Menus/CardValues" unique_id=972118370]
+[node name="Card2" type="SpinBox" parent="DevMenu/Menus/CardValues/PlayerValues" unique_id=972118370]
 layout_mode = 0
 offset_left = 130.0
 offset_top = 96.0
@@ -789,7 +821,7 @@ offset_bottom = 127.0
 max_value = 10.0
 rounded = true
 
-[node name="Card3" type="SpinBox" parent="DevMenu/Menus/CardValues" unique_id=300764519]
+[node name="Card3" type="SpinBox" parent="DevMenu/Menus/CardValues/PlayerValues" unique_id=300764519]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 128.0
@@ -798,7 +830,7 @@ offset_bottom = 159.0
 max_value = 10.0
 rounded = true
 
-[node name="Card4" type="SpinBox" parent="DevMenu/Menus/CardValues" unique_id=270027861]
+[node name="Card4" type="SpinBox" parent="DevMenu/Menus/CardValues/PlayerValues" unique_id=270027861]
 layout_mode = 0
 offset_left = 130.0
 offset_top = 128.0
@@ -807,13 +839,36 @@ offset_bottom = 159.0
 max_value = 10.0
 rounded = true
 
-[node name="Card5" type="SpinBox" parent="DevMenu/Menus/CardValues" unique_id=35875662]
+[node name="Card5" type="SpinBox" parent="DevMenu/Menus/CardValues/PlayerValues" unique_id=35875662]
 layout_mode = 0
-offset_left = 72.0
+offset_left = 40.0
 offset_top = 160.0
-offset_right = 158.5
+offset_right = 126.5
 offset_bottom = 191.0
 max_value = 10.0
+rounded = true
+
+[node name="PlayerAmount" type="Control" parent="DevMenu/Menus/CardValues" unique_id=759170242]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="DevMenu/Menus/CardValues/PlayerAmount" unique_id=2048670464]
+layout_mode = 0
+offset_top = 192.0
+offset_right = 256.0
+offset_bottom = 223.0
+text = "player_dealt_amount"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card1" type="SpinBox" parent="DevMenu/Menus/CardValues/PlayerAmount" unique_id=746348090]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 224.0
+offset_right = 126.5
+offset_bottom = 255.0
+max_value = 5.0
 rounded = true
 
 [node name="Events" type="Control" parent="DevMenu/Menus" unique_id=91007956]
@@ -867,6 +922,7 @@ offset_bottom = 64.0
 text = "Resume"
 
 [connection signal="dev_mode_enabled" from="." to="DevMenu" method="_on_dev_mode_enabled"]
+[connection signal="reveal_cards" from="." to="Cards/OpponentCards" method="_on_reveal_cards"]
 [connection signal="update_game" from="." to="." method="_on_update_game"]
 [connection signal="update_game" from="." to="Cards/PlayerCards" method="update_game"]
 [connection signal="update_game" from="." to="Cards/OpponentCards" method="update_game"]
@@ -882,9 +938,9 @@ text = "Resume"
 [connection signal="pressed" from="Menu/MainMenu" to="Loading" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="Menu/Quit" to="Menu" method="_on_quit_pressed"]
 [connection signal="pressed" from="Menu/Close/ResumeGame" to="Menu" method="_on_resume_game_pressed"]
-[connection signal="value_changed" from="DevMenu/Menus/CardValues/Card1" to="DevMenu" method="_on_card_1_value_changed"]
-[connection signal="value_changed" from="DevMenu/Menus/CardValues/Card2" to="DevMenu" method="_on_card_2_value_changed"]
-[connection signal="value_changed" from="DevMenu/Menus/CardValues/Card3" to="DevMenu" method="_on_card_3_value_changed"]
-[connection signal="value_changed" from="DevMenu/Menus/CardValues/Card4" to="DevMenu" method="_on_card_4_value_changed"]
-[connection signal="value_changed" from="DevMenu/Menus/CardValues/Card5" to="DevMenu" method="_on_card_5_value_changed"]
+[connection signal="value_changed" from="DevMenu/Menus/CardValues/PlayerValues/Card1" to="DevMenu" method="_on_card_1_value_changed"]
+[connection signal="value_changed" from="DevMenu/Menus/CardValues/PlayerValues/Card2" to="DevMenu" method="_on_card_2_value_changed"]
+[connection signal="value_changed" from="DevMenu/Menus/CardValues/PlayerValues/Card3" to="DevMenu" method="_on_card_3_value_changed"]
+[connection signal="value_changed" from="DevMenu/Menus/CardValues/PlayerValues/Card4" to="DevMenu" method="_on_card_4_value_changed"]
+[connection signal="value_changed" from="DevMenu/Menus/CardValues/PlayerValues/Card5" to="DevMenu" method="_on_card_5_value_changed"]
 [connection signal="pressed" from="DevMenu/Resume/Resume" to="DevMenu" method="_on_resume_pressed"]

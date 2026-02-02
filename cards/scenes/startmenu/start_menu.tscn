@@ -8,6 +8,9 @@ script/source = "extends Control
  
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file(\"res://scenes/game/game.tscn\")
+
+func _on_quit_pressed() -> void:
+	get_tree().quit(0)
 "
 
 [sub_resource type="Gradient" id="Gradient_gnoft"]
@@ -30,23 +33,6 @@ func _on_settings_pressed() -> void:
 
 
 func _on_close_settings_pressed() -> void:
-	visible = false
-"
-
-[sub_resource type="GDScript" id="GDScript_nphkf"]
-resource_name = "MorePage"
-script/source = "extends Control
-
-
-func _ready() -> void:
-	visible = false
-
-
-func _on_more_pressed() -> void:
-	visible = true
-
-
-func _on_close_more_pressed() -> void:
 	visible = false
 "
 
@@ -156,7 +142,7 @@ offset_right = 192.0
 offset_bottom = 64.25
 text = "Settings"
 
-[node name="More" type="Control" parent="MenuOptions" unique_id=2017387576]
+[node name="Quit" type="Control" parent="MenuOptions" unique_id=2017387576]
 layout_mode = 1
 anchor_left = -4.0
 anchor_top = -3.2
@@ -167,17 +153,17 @@ offset_top = 1280.0
 offset_right = 960.0
 offset_bottom = 1344.0
 
-[node name="Sprite2D" type="Sprite2D" parent="MenuOptions/More" unique_id=88750233]
+[node name="Sprite2D" type="Sprite2D" parent="MenuOptions/Quit" unique_id=88750233]
 position = Vector2(96, 32.25)
 scale = Vector2(0.75, 64.5)
 texture = SubResource("GradientTexture1D_r6w2g")
 
-[node name="Button" type="Button" parent="MenuOptions/More" unique_id=188105436]
+[node name="Button" type="Button" parent="MenuOptions/Quit" unique_id=188105436]
 layout_mode = 0
 offset_top = 0.25
 offset_right = 192.0
 offset_bottom = 64.25
-text = "More"
+text = "Quit"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1361553839]
 layout_mode = 0
@@ -216,9 +202,10 @@ color = Color(0, 0, 0, 0.6862745)
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 136.0
-text = "There's no settings yet. But thank you so much for trying my game! :3
+text = "There's nothing here yet. But thank you so much for trying my game! :3
 
-Go to \"More\" for a fun fact!
+Here's a card game fact for you while you're here, though:
+In UNO, you can only use the \"wild draw 4\" cards if you can't play anything else. Any other player can \"challenge\" you if you play it. In this case, you show them your deck. If you played it illegally, you draw 4 cards. If you played it legally, though, the challenger has to draw 6 cards. It's in the official rulebook!
 
 <3"
 autowrap_mode = 2
@@ -236,46 +223,7 @@ offset_right = 256.0
 offset_bottom = 64.0
 text = "Close"
 
-[node name="MorePage" type="Control" parent="." unique_id=818245347]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = SubResource("GDScript_nphkf")
-
-[node name="Shade" type="ColorRect" parent="MorePage" unique_id=663677477]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
-color = Color(0, 0, 0, 0.6862745)
-
-[node name="WIP Message" type="Label" parent="MorePage" unique_id=1789515071]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 136.0
-text = "There's nothing here yet. But thank you so much for trying my game! :3
-
-Here's a card game fact for you while you're here, though:
-In UNO, you can only use the \"wild draw 4\" cards if you can't play anything else. Any other player can \"challenge\" you if you play it. In this case, you show them your deck. If you played it illegally, you draw 4 cards. If you played it legally, though, the challenger has to draw 6 cards. It's in the official rulebook!
-
-<3"
-autowrap_mode = 2
-
-[node name="Close" type="Control" parent="MorePage" unique_id=762021468]
-anchors_preset = 0
-offset_left = 448.0
-offset_top = 512.0
-offset_right = 488.0
-offset_bottom = 552.0
-
-[node name="CloseMoreButton" type="Button" parent="MorePage/Close" unique_id=551285142]
-layout_mode = 0
-offset_right = 256.0
-offset_bottom = 64.0
-text = "Close"
-
 [connection signal="pressed" from="MenuOptions/Start/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MenuOptions/Settings/Button" to="SettingsPage" method="_on_settings_pressed"]
-[connection signal="pressed" from="MenuOptions/More/Button" to="MorePage" method="_on_more_pressed"]
+[connection signal="pressed" from="MenuOptions/Quit/Button" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="SettingsPage/Close/CloseSettingsButton" to="SettingsPage" method="_on_close_settings_pressed"]
-[connection signal="pressed" from="MorePage/Close/CloseMoreButton" to="MorePage" method="_on_close_more_pressed"]

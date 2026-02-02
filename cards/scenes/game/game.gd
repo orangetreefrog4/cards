@@ -6,6 +6,7 @@ var dev = globals.dev_mode
 var opponent_decision_chances = [0.9,0.9,0.9,0.9,0.8,0.8,0.8,0.7,0.7,0.7,0.6,0.6,0.5,0.5,0.4,0.4,0.2,0.2,0.1,0.1]
 
 signal update_game()
+signal reveal_cards()
 signal dev_mode_enabled()
 signal set_score(player_value, opponent_value)
 
@@ -69,6 +70,7 @@ func _on_hit_pressed() -> void:
 	next_deal_player()
 	print("hit pressed")
 
+# Has win logic for opponent \/
 func _on_stand_pressed() -> void:
 	print("stand pressed")
 	get_node("UI/PostDealt").set("visible", false)
@@ -77,10 +79,9 @@ func _on_stand_pressed() -> void:
 			next_deal_opponent()
 		else:
 			break
-
 	if g.opponent_dealt_amount >= 5 or g.opponent_score > 21:
 		if g.opponent_dealt_amount >= 5:
-			g.win_reason = "Higher score wins."
+			g.win_reason = "5 cards wins."
 			opponent_wins()
 		elif g.opponent_score > 21:
 			g.win_reason = "Went over 21."
@@ -95,8 +96,10 @@ func _on_stand_pressed() -> void:
 func _on_deal_pressed() -> void:
 	initial_deal_player()
 	initial_deal_opponent()
+	get_node("UI/Text/VSScore").set("text", "?")
 	get_node("UI/PreDealt").set("visible", false)
 
+# Has win logic for player \/
 func _on_update_game() -> void:
 	print("score update")
 	g.player_score = 0
@@ -106,10 +109,10 @@ func _on_update_game() -> void:
 	for num in g.opponent_cards :
 		g.opponent_score += num
 	get_node("UI/Text/YouScore").set("text", g.player_score)
-	get_node("UI/Text/VSScore").set("text", g.opponent_score)
+	get_node("UI/Text/RoundNo").set("text", g.round)
 	if g.player_dealt_amount >= 5 or g.player_score > 21:
 		if g.player_dealt_amount >= 5:
-			g.win_reason = "Higher score wins."
+			g.win_reason = "5 cards wins."
 			player_wins()
 		elif g.player_score > 21:
 			g.win_reason = "Went over 21."
@@ -127,6 +130,9 @@ func next_round() -> void:
 	get_node("Winner").set("visible", false)
 	get_node("Winner/PlayerWin").set("visible", false)
 	get_node("Winner/OpponentWin").set("visible", false)
+	update_game.emit()
+	get_node("UI/PostDealt").set("visible", false)
+	get_node("UI/PreDealt").set("visible", true)
 
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_CTRL) and Input.is_key_pressed(KEY_ALT) and Input.is_key_pressed(KEY_D) :
@@ -147,6 +153,10 @@ func opponent_decide() -> bool:
 
 func player_wins() -> void:
 	print("player win")
+	# \/ reveal opponent cards \/
+	reveal_cards.emit()
+	get_node("UI/Text/VSScore").set("text", g.opponent_score)
+	# /\ reveal opponent cards /\
 	get_node("UI/PreDealt").set("visible", false)
 	get_node("Winner/WinReason").set("text", g.win_reason)
 	get_node("Winner").set("visible", true)
@@ -154,6 +164,10 @@ func player_wins() -> void:
 
 func opponent_wins() -> void:
 	print("opponent win")
+	# \/ reveal opponent cards \/
+	reveal_cards.emit()
+	get_node("UI/Text/VSScore").set("text", g.opponent_score)
+	# /\ reveal opponent cards /\
 	get_node("UI/PreDealt").set("visible", false)
 	get_node("Winner/WinReason").set("text", g.win_reason)
 	get_node("Winner").set("visible", true)
