@@ -1,6 +1,10 @@
 # Cards
 Single player Blackjack.
 Made for Hack Club The Game.
+
+## Demo Video
+<video alt="Demo Vidoe" src="https://github.com/user-attachments/assets/bb4c8766-0021-4fea-b5fe-99154fcf0d01">Demo Video</video>
+
 ### Copyright
 Copyright disclaimer:
 
